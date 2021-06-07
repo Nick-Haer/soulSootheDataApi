@@ -19,12 +19,13 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-axios.get("https://api.imgur.com/3/gallery/r/Eyebleach", {
-    clientId: "731e05220d4aa7b7ed6b8b6d12966ecc556f85ba",
+axios({
+    method: 'get',
+    url: "https://api.imgur.com/3/gallery/r/Eyebleach",
+    headers: { 'authorization': 'Client-ID ' +  "cefddea13c7fc8f"}
 })
-.then((res) => console.log(res.body))
-.catch((err) => console.error(err.message));
-
+.then((res) => console.log(res.data.data.length))
+.catch((err) => console.error(err));
 
 
 // dbConnection();
