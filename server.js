@@ -2,16 +2,21 @@ require('dotenv').config();
 
 const express = require('express');
 
-// const dbConnection = require('./dbConnection');
+const mongoose = require('mongoose');
+
+const dbConnection = require('./dbConnection');
 
 const app = express();
 
 const path = require('path');
 
-const mongoose = require('mongoose');
-const { default: axios } = require('axios');
+dbConnection();
 
-// const routes = require('./controllers');
+const Image = require("./models/Images")
+
+
+const { default: axios } = require('axios');
+const { insertMany } = require('./models/Images');
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -24,11 +29,10 @@ axios({
     url: "https://api.imgur.com/3/gallery/r/Eyebleach",
     headers: { 'authorization': 'Client-ID ' +  "cefddea13c7fc8f"}
 })
-.then((res) => console.log(res.data.data.length))
+.then((res) => Image.insertMany(res.data.data))
 .catch((err) => console.error(err));
 
 
-// dbConnection();
 
 // app.use(routes);
 
