@@ -16,7 +16,7 @@ const ImageSchema = new Schema({
   },
   animated: {
       type: Boolean,
-      required: true,
+      default: true,
   },
   views: {
       type: Number,

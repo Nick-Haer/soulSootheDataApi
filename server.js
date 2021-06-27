@@ -14,9 +14,7 @@ dbConnection();
 
 const Image = require("./models/Images")
 
-
 const { default: axios } = require('axios');
-const { insertMany } = require('./models/Images');
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -26,7 +24,7 @@ const PORT = process.env.PORT || 5000;
 
 axios({
     method: 'get',
-    url: "https://api.imgur.com/3/gallery/r/Eyebleach",
+    url: "https://api.imgur.com/3/gallery/r/AnimalsBeingBros",
     headers: { 'authorization': 'Client-ID ' +  "cefddea13c7fc8f"}
 })
 .then((res) => Image.insertMany(res.data.data))
